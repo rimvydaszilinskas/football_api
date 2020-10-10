@@ -21,6 +21,9 @@ class Player(Base):
 
 
 class PlayerSchema(BaseModel):
+    """
+    Model helper for serialization
+    """
     id: int
     name: str
     age: int

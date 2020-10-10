@@ -7,8 +7,8 @@ function App() {
   const [skip, setSkip] = useState(0)
   const [ammount, setAmmount] = useState(0);
 
-  console.log(process.env.REACT_APP_URL)
   useEffect(() => {
+    // Load initial data from the server on component load
     fetch(`http://${window.location.hostname}:8000/?skip=${skip}`).then(res => {
       if (res.ok) {
         return res.json()
@@ -24,7 +24,7 @@ function App() {
 
   const search = (e) => {
     e.preventDefault()
-    fetch(`http://${window.location.hostname}/?q=${input}`).then(res => {
+    fetch(`http://${window.location.hostname}:8000/?q=${input}`).then(res => {
       if (res.ok) {
         return res.json()
       }
@@ -38,8 +38,9 @@ function App() {
   }
   
   const loadMore = (e) => {
+    // Get the next layer of data
     e.preventDefault()
-    fetch(`http://${window.location.hostname}/?skip=${skip}`).then(res => {
+    fetch(`http://${window.location.hostname}:8000/?skip=${skip}`).then(res => {
       if (res.ok) {
         return res.json()
       }
@@ -52,6 +53,7 @@ function App() {
   }
 
   const getTeam = (e) => {
+    // Get the team up to the ammount
     e.preventDefault()
 
     fetch(`http://${window.location.hostname}:8000`, {

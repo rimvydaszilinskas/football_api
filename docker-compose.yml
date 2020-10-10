@@ -15,7 +15,7 @@ services:
         networks:
             - mysql
 
-    app:
+    footballapp:
         container_name: footballapp
         build: ./db
         depends_on:
@@ -35,12 +35,13 @@ services:
         container_name: fe
         build: ./fe
         ports:
-            - 80:3000
+            - 88:3000
         stdin_open: true
+        environment:
+            - REACT_APP_SERVER_URL=http://footballapp:8000
         networks:
             - api
 
 networks:
     api:
-        driver: bridge
     mysql:
